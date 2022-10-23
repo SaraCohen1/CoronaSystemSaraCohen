@@ -43,7 +43,7 @@ https://learn.microsoft.com/en-us/aspnet/core/mvc/overview
 
  חיברתי לפרויקט database מסוג sqlserver.
  
-על מנת לחבר את הdatabase היית צריכה להוריד כמה packages להוסיף בנאי וליצור תקיעה של Data
+על מנת לחבר את הdatabase הייתי צריכה להוריד כמה packages להוסיף בנאי וליצור תקיעה של Data
 
 מכיון שתחום זה הינו חדש לי לא הספקתי לבדוק בשלמות את תקינות הקלטים שמוזנים למערכת.
 
