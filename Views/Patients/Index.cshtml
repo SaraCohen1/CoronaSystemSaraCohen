@@ -1,0 +1,184 @@
+﻿@model IEnumerable<CoronaSystem.Models.Person>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+@using (Html.BeginForm("Index", "Patients", FormMethod.Post))
+{
+    <input type="text" id="textPerson" name="Id" />
+
+    <br />
+    <input type="submit" id="btnSubmit" value="Submit" />
+    <br />
+}
+@section scripts{
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#textPerson").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/Patients/AutoComplete/',
+                        data: { "prefix": request.term },
+                        type: "POST",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    //get selected value
+                    //$("#personNameValue").val(i.item.val);
+                },
+                minLength: 1
+            });
+        });
+    </script>
+}
+
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+@*                @Html.DisplayNameFor(model => model.MyId)
+*@    
+ID
+</th>
+            <th>
+@*                @Html.DisplayNameFor(model => model.FirstName)
+*@ 
+FIRST NAME
+</th>
+            <th>
+@*                @Html.DisplayNameFor(model => model.LastName)
+*@  
+LAST NAME
+</th>
+            <th>
+@*                @Html.DisplayNameFor(model => model.Adress)
+*@   
+ADDRESS
+</th>
+            <th>
+@*                @Html.DisplayNameFor(model => model.PhoneNumber)
+*@  
+PHONE NUMBER
+</th>
+            <th>
+@*                @Html.DisplayNameFor(model => model.CellPhoneNumber)
+*@ 
+CELL NUMBER
+</th>
+@*            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstShot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecondShot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThirdShot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FourthShot)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vaccine1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vaccine2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vaccine3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vaccine4)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PositiveDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NegativeDate)
+            </th>
+*@            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MyId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CellPhoneNumber)
+            </td>
+         @*   <td>
+                @Html.DisplayFor(modelItem => item.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstShot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecondShot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThirdShot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FourthShot)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vaccine1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vaccine2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vaccine3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vaccine4)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PositiveDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NegativeDate)
+            </td>*@
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PersonId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.PersonId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.PersonId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
